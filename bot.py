@@ -1,9 +1,11 @@
 import discord
 from dotenv import load_dotenv
+from compiler import getScript
 import os
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
+PREFIX = os.getenv("PREFIX")
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -19,6 +21,10 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    print(message.content)
-    
+    if(message.content.startswith(f"{PREFIX}```") and message.content.endswith("```")):
+        msg = message.content.split("\n")
+        script = msg[1]
+        res = f"{msg[0]}\n{getScript(script)}{msg[-1]}"
+        await message.channel.send(res)
+
 client.run(TOKEN)

@@ -18,4 +18,5 @@ def getScript(script: str):
         "clientSecret": CLIENTSECRET
     }
     response = requests.post(url=path, headers = {"Content-Type" : "application/json"}, data=json.dumps(payload))
-    return response.text
+
+    return response.json()['output']
