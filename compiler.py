@@ -8,11 +8,13 @@ path = "https://api.jdoodle.com/v1/execute"
 CLIENTID = os.getenv("CLIENTID")
 CLIENTSECRET = os.getenv("CLIENTSECRET")
 
-def getScript(script: str):
+def getScript(language: str, script: str):
+    
+
     payload = {
         "script": script,
         "stdin": "",
-        "language": "python3",
+        "language": language,
         "versionIndex": "0",
         "clientId": CLIENTID,
         "clientSecret": CLIENTSECRET

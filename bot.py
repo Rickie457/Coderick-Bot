@@ -21,10 +21,12 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if(message.content.startswith(f"{PREFIX}```") and message.content.endswith("```")):
-        msg = message.content.split("\n")
-        script = msg[1]
-        res = f"{msg[0]}\n{getScript(script)}{msg[-1]}"
+    if(message.content.startswith(f"{PREFIX}compile")):
+        msg = message.content.split("```")[1]
+        script = msg.split("\n", 1)
+        script = script[1]
+        language = "python3"
+        res = f"```\n{getScript(language, script)}```"
         await message.channel.send(res)
 
 client.run(TOKEN)
